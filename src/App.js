@@ -2,49 +2,48 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./App.css";
 import Details from './Details'
-// import { BASE_URL, API_KEY } from './index.js'
+import { BASE_URL, API_KEY } from './index.js'
 
-function App() {
-  // const [nasadat, SetNasaDat] = useState([]);
-  // const [todaysPic, SetTodaysPic] = useState(null);
+export default function App() {
+  const [nasaData, setNasaData] = useState([]);
+  const [currentDate, setDate] = useState(null);
 
-  // const [nasaData, setNasaData] = useState([]);
+  const dateButton = date => {
+    setDate(date)
+  }
+  const dateButtonClose = () => {
+    setDate(null);
+  }
 
-  //   useEffect(() => {
-  //       console.log(` fetching nasa data`);
-  //       axios
-  //       .get(`${BASE_URL}/planetary/apod?api_key=${API_KEY}`)
-  //       .then((res) => {
-  //         debugger
-  //           setNasaData(res.data)
-  //       })
-  //       .catch((err) => {
-  //           console.log(err);
-  //       })
-  //       return () => {
-  //           console.log(`Cleanup for nasadata fetch`);
-  //       };
-  //   }, [])
+  useEffect(() => {
+  axios
+  .get(`${BASE_URL}/planetary/apod?api_key=${API_KEY}`)
+  .then((res) => {
+    setNasaData(res.data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  }, [])
+
+  const Date = props => (
+    <div className='App'>
+      <button onClick={() => dateButton(props.info.date)}>
+        See Image
+      </button>
+    </div>
+  )
 
 
-  //   return(
-  //     <div className='App'>
-  //         <h1>this is the nasa data</h1>
-  //         {
-  //             <div className='App-header'>
-  //                 <p><b>Title</b>: {nasaData.title}</p>
-  //                 <img src={nasaData.hdurl} alt='Photo of The Day'></img>
-  //                 <p><b>Copright</b>: {nasaData.copyright}</p>
-  //                 <p><b>Date</b>: {nasaData.date}</p>
-  //                 <a className='App-link' href={nasaData.url}>Image URL</a>
-  //                 <p><b>Explanation</b>: {nasaData.explanation}</p>
-  //             </div>
-  //         }
-  //     </div>
-  // );
   return (
-    <div>
-    <Details />
+    <div className='App'>
+          <h1>The Nasa Photo of the Day</h1>
+      {
+        <Date key={nasaData.date} info={nasaData} />        
+      }
+      {
+        currentDate && <Details dateId={currentDate} close={dateButtonClose}/>
+      }
     </div>
   )
 
@@ -55,4 +54,4 @@ function App() {
   app! Have fun <span role="img" aria-label='go!'>🚀</span>!
 </p>       */
 
-export default App;
+// export default App;
