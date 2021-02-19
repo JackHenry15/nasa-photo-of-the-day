@@ -1,18 +1,21 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import "./App.css";
+import "../App.css";
 import Details from './Details'
-import { BASE_URL, API_KEY } from './index.js'
+import Date from './Date'
+import { BASE_URL, API_KEY } from '../Constants/index.js'
 
 export default function App() {
   const [nasaData, setNasaData] = useState([]);
   const [currentDate, setDate] = useState(null);
 
-  const dateButton = date => {
-    setDate(date)
+  const dateButton = () => {
+    setDate('1')
+
   }
   const dateButtonClose = () => {
     setDate(null);
+    
   }
 
   useEffect(() => {
@@ -26,20 +29,12 @@ export default function App() {
   });
   }, [])
 
-  const Date = props => (
-    <div className='App'>
-      <button onClick={() => dateButton(props.info.date)}>
-        See Image
-      </button>
-    </div>
-  )
-
 
   return (
     <div className='App'>
-          <h1>The Nasa Photo of the Day</h1>
+      <h1>Nasa Photo of the Day</h1>
       {
-        <Date key={nasaData.date} info={nasaData} />        
+        <Date bold info={nasaData} action={dateButton}/>  
       }
       {
         currentDate && <Details dateId={currentDate} close={dateButtonClose}/>
@@ -49,9 +44,4 @@ export default function App() {
 
 }
 
-/* <p>
-  Read through the instructions in the README.md file to build your NASA
-  app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-</p>       */
 
-// export default App;

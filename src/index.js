@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 
-export const BASE_URL = 'https://api.nasa.gov'
-export const API_KEY = 'aRGpKhs417QUpGWeh2fnKSYNPsglpnFn3pQ9wIur'
+import { ThemeProvider } from "styled-components";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import App from "./Components/App";
+import theme from "./theme";
+
+ReactDOM.render(<ThemeProvider theme={theme}><App /></ThemeProvider>, 
+    document.getElementById("root")
+    );
