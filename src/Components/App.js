@@ -20,12 +20,11 @@ export default function App() {
 
 
   return (
-    <div className='App'>
-      <h1>Nasa Photo of the Day</h1>
+    <>
       {
         <Date bold info={nasaData}/>  
       }
-    </div>
+    </>
   )
 
 }
