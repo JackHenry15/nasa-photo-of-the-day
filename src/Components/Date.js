@@ -13,6 +13,9 @@ const StyledDetails = styled.div`
     : 'initial'
     };
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     button {
         color:${props => props.theme.secondaryColor};
@@ -29,11 +32,15 @@ const StyledDetails = styled.div`
 export default function Date({ info, action, action2, bold }){
     return(
     <StyledDetails bold={bold}>
+    <h1>Today we are viewing....</h1>
     <h1>{info.title}</h1>
       <button onClick={() => action(info.date)}>
         See Image
       </button>
       <Details/>
+      <button onClick={() => action2()}>
+        Hide Image and Info
+      </button>
     </StyledDetails>
     )
 }
